@@ -91,9 +91,6 @@ def main(page: ft.Page):
             try:
                 respuesta = preguntar_ia(pregunta_usuario, materia.value)
                 
-            except Exception as e:
-                respuesta = f"Error conexión IA"
-
             def actualizar():
                 chat_historial.controls.append(
                     ft.Text(f"🤖 Tutor: {respuesta}")
