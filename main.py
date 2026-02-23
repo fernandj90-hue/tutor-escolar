@@ -10,6 +10,8 @@ MODELO = "meta-llama/llama-3-8b-instruct:free"
 
 
 def preguntar_ia(pregunta, materia):
+    if not API_KEY:
+        return "Error: API_KEY no configurada en Render."
 
     try:
         system_msg = f"""
@@ -32,13 +34,21 @@ def preguntar_ia(pregunta, materia):
                     {"role": "user", "content": pregunta}
                 ],
                 "temperature": 0.6
-            }
+            },
+            timeout=30
         )
+            if respuesta.status_code !=200:
+        return  f"Error API:
+        {respuesta.status_code}"
+        
+              data = respuesta.json(()
 
-        return respuesta.json()["choices"][0]["message"]["content"]
-
-    except Exception:
-        return "Error de conexión. Intenta otra pregunta."
+               return data["choices"][0]
+        ["messege"]["content"]
+        
+    except Exception as e:
+        return f"Error interno:
+        {str(e)}"
 
 
 def main(page: ft.Page):
