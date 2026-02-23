@@ -106,7 +106,7 @@ def main(page: ft.Page):
                 chat_historial,
                 height=400,
                 border_radius=12,
-                bgcolor=ft.colors.GREY_100,
+                bgcolor=ft.Colors.GREY_100,
                 padding=15,
                 expand=True
             ),
