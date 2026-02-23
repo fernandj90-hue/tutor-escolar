@@ -10,15 +10,12 @@ MODELO = "meta-llama/llama-3-8b-instruct:free"
 
 
 def preguntar_ia(pregunta, materia):
+
     if not API_KEY:
         return "Error: API_KEY no configurada en Render."
-    try:
-        system_msg = f"""
-        Eres un tutor escolar para estudiantes de secundaria.
-        Materia: {materia}
 
-        Responde de forma simple, con ejemplos fáciles y sin usar lenguaje complejo.
-        """
+    try:
+        system_msg = f"Eres un tutor escolar de {materia}. Explica de forma simple para secundaria."
 
         respuesta = requests.post(
             URL_IA,
@@ -36,18 +33,16 @@ def preguntar_ia(pregunta, materia):
             },
             timeout=30
         )
-         if respuesta.status_code != 200:
-                     return f"Error API:
-        {respuesta.status_code}"
-        
-              data = respuesta.json()
 
-               return data["choices"][0]
-        ["messege"]["content"]
-        
+        if respuesta.status_code != 200:
+            return f"Error API: {respuesta.status_code}"
+
+        data = respuesta.json()
+
+        return data["choices"][0]["message"]["content"]
+
     except Exception as e:
-        return f"Error interno:
-        {str(e)}"
+        return f"Error interno: {str(e)}"
 
 
 def main(page: ft.Page):
