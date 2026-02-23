@@ -72,36 +72,34 @@ def main(page: ft.Page):
 
     loading = ft.ProgressRing(visible=False)
 
-    def enviar(e):
+   def enviar(e):
 
-        if not entrada.value:
-            return
+    if not entrada.value:
+        return
 
-        pregunta_usuario = entrada.value
-        entrada.value = ""
+    pregunta_usuario = entrada.value
+    entrada.value = ""
 
-        chat_historial.controls.append(
-            ft.Text(f"👦 Tú: {pregunta_usuario}")
-        )
+    chat_historial.controls.append(
+        ft.Text(f"👦 Tú: {pregunta_usuario}")
+    )
 
-        loading.visible = True
-        page.update()
+    loading.visible = True
+    page.update()
 
-        def worker():
-            try:
-                respuesta = preguntar_ia(pregunta_usuario, materia.value)
-                
-            def actualizar():
-                chat_historial.controls.append(
-                    ft.Text(f"🤖 Tutor: {respuesta}")
-                )
+    def worker():
+        respuesta = preguntar_ia(pregunta_usuario, materia.value)
 
-                loading.visible = False
-                page.update()
+        def actualizar():
+            chat_historial.controls.append(
+                ft.Text(f"🤖 Tutor: {respuesta}")
+            )
+            loading.visible = False
+            page.update()
 
-            page.run_on_ui_thread(actualizar)
+        page.run_on_ui_thread(actualizar)
 
-        threading.Thread(target=worker).start()
+    threading.Thread(target=worker, daemon=True).start()
 
     page.add(
         ft.Column([
