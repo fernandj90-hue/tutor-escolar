@@ -72,7 +72,7 @@ def main(page: ft.Page):
 
     loading = ft.ProgressRing(visible=False)
 
-   def enviar(e):
+def enviar(e):
 
     if not entrada.value:
         return
@@ -87,10 +87,10 @@ def main(page: ft.Page):
     loading.visible = True
     page.update()
 
-    def worker():
+   def worker():
         respuesta = preguntar_ia(pregunta_usuario, materia.value)
 
-        def actualizar():
+       def actualizar():
             chat_historial.controls.append(
                 ft.Text(f"🤖 Tutor: {respuesta}")
             )
