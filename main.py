@@ -37,11 +37,12 @@ def preguntar_ia(pregunta, materia):
             },
             timeout=30
         )
-            if respuesta.status_code !=200:
+            if respuesta.status_code !=
+        200:
         return  f"Error API:
         {respuesta.status_code}"
         
-              data = respuesta.json(()
+              data = respuesta.json()
 
                return data["choices"][0]
         ["messege"]["content"]
