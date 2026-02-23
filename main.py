@@ -124,6 +124,6 @@ def enviar(e):
 
 if __name__ == "__main__":
     PORT = int(os.getenv("PORT", 8550))
-    ft.run(target=main,
+    ft.run(main,
            host="0.0.0.0",
            port=PORT)
