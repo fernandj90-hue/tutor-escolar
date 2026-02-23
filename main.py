@@ -87,10 +87,10 @@ def enviar(e):
     loading.visible = True
     page.update()
 
-  def worker():
+    def worker():
         respuesta = preguntar_ia(pregunta_usuario, materia.value)
 
-     def actualizar():
+        def actualizar():
             chat_historial.controls.append(
                 ft.Text(f"🤖 Tutor: {respuesta}")
             )
