@@ -88,7 +88,11 @@ def main(page: ft.Page):
         page.update()
 
         def worker():
-            respuesta = preguntar_ia(pregunta_usuario, materia.value)
+            try:
+                respuesta = preguntar_ia(pregunta_usuario, materia.value)
+                
+            except Exception as e:
+                respuesta = f"Error conexión IA"
 
             def actualizar():
                 chat_historial.controls.append(
@@ -98,7 +102,7 @@ def main(page: ft.Page):
                 loading.visible = False
                 page.update()
 
-            page.add_to_thread_pool(actualizar)
+            page.run_on_ui_thread(actualizar)
 
         threading.Thread(target=worker).start()
 
