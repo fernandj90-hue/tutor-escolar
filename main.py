@@ -97,7 +97,7 @@ def enviar(e):
             loading.visible = False
             page.update()
 
-        page.run_on_ui_thread(actualizar)
+        page.call_from_thread(actualizar)
 
     threading.Thread(target=worker, daemon=True).start()
 
